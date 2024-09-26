@@ -1,9 +1,10 @@
 # EntregaWeb
 
-Este proyecto se creo con la versión de Angular 16.1.8
-Este proyecto se creo con la versión de Node 16.14.0
+1. Este proyecto se creo con la versión de Angular 16.1.8
+2. Este proyecto se creo con la versión de Node 16.14.0
 
 ## Ejecución
 
-Ejecutar el comando npm install en la raíz del proyecto
-Ejecutar el comando ng serve en la raíz del proyecto para inciar la aplicación
+1. Ejecutar el comando npm install en la raíz del proyecto
+2. Ejecutar el comando ng serve en la raíz del proyecto para inciar la aplicación
+

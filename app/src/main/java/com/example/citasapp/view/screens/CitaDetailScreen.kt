@@ -140,7 +140,9 @@ fun CitaDetailScreen(
                         onValueChange = { notas = it },
                         readOnly = true,
                         label = { androidx.compose.material.Text("Notas") },
-                        modifier = Modifier.height(149.dp),
+                        modifier = Modifier.height(149.dp).width(280.dp),
+                        maxLines = Int.MAX_VALUE,
+                        singleLine = false,
                     )
                 }
             }

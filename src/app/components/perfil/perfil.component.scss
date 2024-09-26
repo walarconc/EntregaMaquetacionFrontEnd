@@ -13,3 +13,29 @@
   margin-left: 15%;
 }
 
+
+.titlePerfil {
+  color: var(--Schemes-On-Surface, #1d1b20);
+  font-family: var(--Headline-Medium-Font, Roboto);
+  font-size: var(--Headline-Medium-Size, 28px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--Headline-Medium-Line-Height, 36px); /* 128.571% */
+  letter-spacing: var(--Headline-Small-Tracking, 0px);
+  margin-top: 95px;
+  margin-bottom: 28px;
+}
+
+
+.subtitulo {
+  color: var(--Schemes-On-Surface, #1D1B20);
+
+  /* M3/headline/small */
+  font-family: var(--Headline-Small-Font, Roboto);
+  font-size: var(--Headline-Small-Size, 24px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Headline-Small-Line-Height, 32px);
+  /* 133.333% */
+  letter-spacing: var(--Headline-Small-Tracking, 0px);
+}

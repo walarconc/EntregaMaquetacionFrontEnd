@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SidenavComponent {
   selectedButtonIndex = 0;
-
+  imageUrl: string = 'assets/images/profile.png';
   selectButton(index: number) {
     this.selectedButtonIndex = index;
   }

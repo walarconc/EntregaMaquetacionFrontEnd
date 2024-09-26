@@ -49,14 +49,10 @@
 
   <mat-sidenav-content>
     <div class="main-content">
-      <div class="contentHeader">
         <div class="d-flex flex-row-reverse bd-highlight align-items-center">
-          <div class="p-2 bd-highlight">
-            <mat-icon>account_circle</mat-icon>
-          </div>
-          <div class="p-2 bd-highlight"><span>@Pepito</span></div>
+          <img [src]="imageUrl" class="avatar-3d" alt="doctor" />
+          <div class="p-2"><div class="profile">@Pepito</div></div>
         </div>
-      </div>
       <div class="content mat-elevation-z8 mt-5">
         <router-outlet></router-outlet>
       </div>

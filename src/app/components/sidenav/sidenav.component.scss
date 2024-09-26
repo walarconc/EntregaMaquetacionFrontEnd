@@ -32,7 +32,6 @@ mat-sidenav span {
   height: 100%;
   margin-left: 32px;
   margin-right: 2%;
-  margin-top: 5%;
   margin-bottom: 5%;
   padding-top: 2%;
 }
@@ -72,6 +71,19 @@ mat-sidenav-container {
   border-radius: 20px;
   width: 56px;
   height: 32px;
+}
+
+.profile {
+  color: var(--Schemes-On-Surface, #1D1B20);
+
+  /* M3/headline/small */
+  font-family: var(--Headline-Small-Font, Roboto);
+  font-size: var(--Headline-Small-Size, 24px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Headline-Small-Line-Height, 32px);
+  /* 133.333% */
+  letter-spacing: var(--Headline-Small-Tracking, 0px);
 }
 
 

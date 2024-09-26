@@ -1,0 +1,81 @@
+.title {
+  color: var(--Schemes-On-Surface, #1D1B20);
+  font-family: var(--Headline-Medium-Font, Roboto);
+  font-size: var(--Headline-Medium-Size, 28px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--Headline-Medium-Line-Height, 36px);
+  /* 128.571% */
+  letter-spacing: var(--Headline-Small-Tracking, 0px);
+}
+
+
+.doctor-row {
+  padding: 12px 16px;
+  gap: 16px;
+}
+
+.avatar-3d {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+
+}
+
+.nombre-doctor {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: var(--Schemes-On-Surface, #1D1B20);
+  text-overflow: ellipsis;
+
+  /* M3/title/large */
+  font-family: var(--Title-Large-Font, Roboto);
+  font-size: var(--Title-Large-Size, 22px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Title-Large-Line-Height, 28px);
+  /* 127.273% */
+  letter-spacing: var(--Title-Large-Tracking, 0px);
+}
+
+.especialidad-doctor {
+  color: var(--Schemes-On-Surface-Variant, #3E4A40);
+  /* M3/body/medium */
+  font-family: var(--Body-Medium-Font, Roboto);
+  font-size: var(--Body-Medium-Size, 14px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Body-Medium-Line-Height, 20px);
+  /* 142.857% */
+  letter-spacing: var(--Body-Medium-Tracking, 0.25px);
+}
+
+.heart-icon-active {
+  color: var(--Schemes-Primary, #FF5A5F);
+}
+
+.heart-icon {
+  display: flex;
+  height: 64px;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.heart-icon:hover {
+  transform: scale(1.2);
+}
+
+
+.doctors-list {
+  padding: 0px 8px;
+  gap: 4px;
+  flex-shrink: 0;
+  align-self: stretch;
+}

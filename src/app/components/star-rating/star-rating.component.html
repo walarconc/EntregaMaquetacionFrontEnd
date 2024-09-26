@@ -1,0 +1,12 @@
+<div class="star-rating">
+  <mat-icon
+    *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+    class="star-icon"
+    :color="primary"
+    (click)="rate(i + 1)"
+    (mouseover)="hover(i + 1)"
+    (mouseleave)="hover(0)"
+  >
+    {{ getStarIcon(i) }}
+  </mat-icon>
+</div>

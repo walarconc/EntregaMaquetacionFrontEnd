@@ -6,14 +6,23 @@ import {RegistroComponent} from "./components/registro/registro.component";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
 import {PerfilComponent} from "./components/perfil/perfil.component";
 import {InformesComponent} from "./components/informes/informes.component";
-
+import {ListaDoctoresComponent} from "./components/lista-doctores/lista-doctores.component";
+import {DetalleDoctorComponent} from "./components/detalle-doctor/detalle-doctor.component";
 
 const routes: Routes = [
   { path: 'user', component: SidenavComponent,
     children: [
       {
-        path: 'doctores',
+        path: 'doctores/add',
         component: DoctoresComponent
+      },
+      {
+        path: 'doctores/:id',
+        component: DetalleDoctorComponent
+      },
+      {
+        path: 'doctores',
+        component: ListaDoctoresComponent
       },
       {
         path: 'alertas',

@@ -13,7 +13,7 @@ fun RootNavGraph() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Graph.HOME
+        startDestination = Graph.LOGIN
     ){
         composable(route = Graph.LOGIN){
             LoginScreen(

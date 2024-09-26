@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AddCircleOutline
@@ -71,11 +73,13 @@ fun CitaDetailScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         )  {
-            Box(modifier = Modifier.padding(bottom = 40.dp)) {
+            Box(modifier = Modifier.padding(bottom = 40.dp, top = 20.dp)) {
                 var especialidad by remember {mutableStateOf("Medicina general")}
                 Column{
                     TextField(
@@ -181,7 +185,7 @@ fun CitaDetailScreen(
                             Column(
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
+                            ) {git add .
                                 Text("Agregar")
                                 Text("recordatorios")
                             }

@@ -28,7 +28,6 @@ import com.example.citasapp.view.navigation.currentRoute
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-
 ){
     val navHomeController = rememberNavController()
     val currentRoute = currentRoute(navHomeController)
@@ -53,6 +52,7 @@ fun HomeScreen(
         ) {
             HomeNavigation(
                 navController = navHomeController
+
             )
         }
     }

@@ -2,11 +2,11 @@
   <div class="d-flex justify-content-center mb-5 mt-5 title">Doctores</div>
   <div class="d-flex justify-content-center row doctors-list">
     <div *ngFor="let doctor of doctors" class="col-12">
-      <div class="doctor-row d-flex">
+      <div class="doctor-row d-flex" (click)="goToDoctor(doctor)">
         <img [src]="doctor.avatar" class="avatar-3d" alt="doctor" />
         <div class="flex-grow-1 row">
           <p class="nombre-doctor col-8">
-            {{ doctor.nombres }} {{ doctor.apellidos }}
+            {{ doctor.fullname }}
           </p>
           <div class="col-4 d-flex justify-content-end">
             <app-star-rating [(rating)]="doctor.rating"></app-star-rating>
@@ -19,7 +19,7 @@
             aria-hidden="false"
             color="primary"
             aria-label="Example home icon"
-            (click)="toggleFavorite(doctor)"
+            (click)="toggleFavorite(doctor); $event.stopPropagation()"
             class="material-icons-outlined"
             >{{ doctor.favorito ? "favorite" : "favorite_outline" }}
           </mat-icon>
@@ -29,7 +29,12 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="p-2 bd-highlight">
-        <button mat-raised-button color="primary" class="rounded-button" (click)="goToAdd()">
+        <button
+          mat-raised-button
+          color="primary"
+          class="rounded-button"
+          (click)="goToAdd()"
+        >
           Nuevo registro
         </button>
       </div>

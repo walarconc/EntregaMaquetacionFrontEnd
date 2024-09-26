@@ -29,4 +29,7 @@ export class ListaDoctoresComponent implements OnInit {
   goToAdd() {
     this.router.navigate(['user/doctores/add']);
   }
+  goToDoctor(doctor: Doctor) {
+    this.router.navigate(['user/doctores', doctor.id]);
+  }
 }

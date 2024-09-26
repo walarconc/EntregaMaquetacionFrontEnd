@@ -1,4 +1,13 @@
 // Doctor model
+export class Cita {
+  fecha: Date;
+  nombre: string;
+
+  constructor(fecha: Date, nombre: string) {
+    this.fecha = fecha;
+    this.nombre = nombre;
+  }
+}
 
 export class Doctor {
   nombres: string;
@@ -9,6 +18,8 @@ export class Doctor {
   avatar: string;
   favorito: boolean;
   rating: number;
+  id: string;
+  citas: Cita[];
 
   constructor(
     nombres: string,
@@ -16,7 +27,9 @@ export class Doctor {
     especialidad: string,
     contacto: string,
     perfil: string,
-    avatar: string
+    avatar: string,
+    id: string,
+    citas: Cita[]
   ) {
     this.nombres = nombres;
     this.apellidos = apellidos;
@@ -26,5 +39,11 @@ export class Doctor {
     this.avatar = avatar;
     this.favorito = false;
     this.rating = 0;
+    this.id = id;
+    this.citas = citas;
+  }
+
+  get fullname(): string {
+    return `${this.nombres} ${this.apellidos}`;
   }
 }

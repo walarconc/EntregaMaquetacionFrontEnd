@@ -1,3 +1,43 @@
-<p>
-  detalle-doctor works!
-</p>
+<div>
+  <div class="d-flex align-items-start back-bar">
+    <div class="back">
+      <mat-icon aria-label="Example home icon"> arrow_back </mat-icon>
+    </div>
+  </div>
+  <div class="d-flex row doctor-info">
+    <div class="d-flex">
+      <img [src]="doctor.avatar" class="avatar-3d" alt="doctor" />
+      <div class="">
+        <p class="nombre-doctor">{{ doctor.fullname }}</p>
+        <p class="perfil-doctor">{{ doctor.perfil }}</p>
+      </div>
+    </div>
+    <div class="citas d-flex row">
+      <div class="title-section col-12">
+        <p class="citas-texto">Citas programadas con este doctor</p>
+      </div>
+      <div *ngFor="let cita of doctor.citas" class="cita">
+        <div class="cita-row d-flex">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            class="today"
+            height="60"
+            width="60"
+            >today
+          </mat-icon>
+          <div class="flex-grow-1 row">
+            <p class="cita-nombre col-12">
+              {{ cita.nombre }}
+            </p>
+            <p class="cita-fecha col-12">
+              {{ cita.fecha }}
+            </p>
+          </div>
+          <!-- heart icon -->
+        </div>
+        <mat-divider class="mx-3 col-12"></mat-divider>
+      </div>
+    </div>
+  </div>
+</div>

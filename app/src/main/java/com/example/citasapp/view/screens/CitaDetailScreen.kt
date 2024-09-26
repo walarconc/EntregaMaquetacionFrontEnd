@@ -185,7 +185,7 @@ fun CitaDetailScreen(
                             Column(
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.CenterHorizontally
-                            ) {git add .
+                            ) {
                                 Text("Agregar")
                                 Text("recordatorios")
                             }

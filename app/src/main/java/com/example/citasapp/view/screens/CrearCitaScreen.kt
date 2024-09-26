@@ -31,6 +31,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -59,6 +60,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import com.example.citasapp.view.components.TopBar
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -72,7 +74,7 @@ fun CrearCitaScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
-        topBar = { TopAppCrearCita(scrollBehavior, onClickBack) },
+        topBar = { TopBar("Crear Cita",scrollBehavior, onClickBack) } ,
         modifier = Modifier
             .fillMaxSize(),
     ) {
@@ -112,63 +114,39 @@ fun DatePickerField() {
         )
 
         if (showDatePicker) {
-            Popup(
-                onDismissRequest = { showDatePicker = false },
-                alignment = Alignment.TopStart,
-                properties = PopupProperties(dismissOnClickOutside = true)
-            ) {
-                FlowColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .shadow(elevation = 4.dp)
-                        .background(MaterialTheme.colorScheme.surface)
-                        .padding(16.dp)
-                ) {
-                    DatePicker(
-                        state = datePickerState,
-                        showModeToggle = false,
-                        title = { Text("Selecciona una fecha") },
-                        dateFormatter = DatePickerDefaults.dateFormatter(selectedDateSkeleton = "MM/dd/yyyy"),
-                    )
-                    FlowRow(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        TextButton(
-                            onClick = {
-                                selectedDate?.let {
-                                    datePickerState.selectedDateMillis = null
-                                }
-                            },
-                            enabled = true
+
+            DatePickerDialog(
+                onDismissRequest = {  },
+                confirmButton={
+                    TextButton(
+                        onClick = { showDatePicker = false },
+                        enabled = selectedDate.isNotEmpty(),
+
                         ) {
-                            Text("Limpiar")
-                        }
-                        FlowRow() {
-                            TextButton(
-                                onClick = {
-                                    showDatePicker = false
-                                    selectedDate?.let {
-                                        datePickerState.selectedDateMillis = null
-                                    }
-                                },
-                                enabled = true,
-                            ) {
-                                Text("Cancelar")
-                            }
-                            TextButton(
-                                onClick = { showDatePicker = false },
-                                enabled = selectedDate.isNotEmpty(),
-
-                                ) {
-                                Text("OK")
-                            }
-                        }
-
+                        Text("OK")
                     }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            showDatePicker = false
+                            selectedDate?.let {
+                                datePickerState.selectedDateMillis = null
+                            }
+                        },
+                        enabled = true,
+                    ) {
+                        Text("Cancelar")
+                    }
+                },
 
-
-                }
+                ){
+                DatePicker(
+                    state = datePickerState,
+                    showModeToggle = false,
+                    title = { Text("") },
+                    dateFormatter = DatePickerDefaults.dateFormatter(selectedDateSkeleton = "MM/dd/yyyy"),
+                )
             }
         }
     }
@@ -344,7 +322,7 @@ fun CrearCitaFormulario(onCliclCancelar: () -> Unit, onClickAgregar: () -> Unit)
         }
         FlowRow(
             modifier = Modifier
-                .padding(25.dp, 0.dp)
+                .padding(50.dp, 0.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
@@ -355,35 +333,6 @@ fun CrearCitaFormulario(onCliclCancelar: () -> Unit, onClickAgregar: () -> Unit)
         }
     }
 
-
 }
 
 
-@Composable
-fun TopAppCrearCita(
-    scrollBehavior: TopAppBarScrollBehavior,
-    onClick: () -> Unit
-) {
-    TopAppBar(
-        title = {
-            Text("Nueva cita")
-        },
-        navigationIcon = {
-            IconButton(onClick = onClick) {
-                Icon(
-                    Icons.Filled.ArrowBack,
-                    contentDescription = "" // Add a valid content description
-                )
-            }
-        },
-        actions = {
-            IconButton(onClick = {}) {
-                Icon(
-                    Icons.Outlined.Notifications,
-                    contentDescription = "" // Add a valid content description
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior,
-    )
-}

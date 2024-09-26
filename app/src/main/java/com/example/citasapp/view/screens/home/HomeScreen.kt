@@ -31,13 +31,8 @@ fun HomeScreen(
 ){
     val navHomeController = rememberNavController()
     val currentRoute = currentRoute(navHomeController)
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-//            TopBarHome(scrollBehavior = scrollBehavior)
-        },
         bottomBar = {
             BottomBar(
                 navController = navHomeController,

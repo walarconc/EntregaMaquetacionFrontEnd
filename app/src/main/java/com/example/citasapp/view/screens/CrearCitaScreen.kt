@@ -8,21 +8,27 @@ package com.example.citasapp.view.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.FlowColumnOverflow
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,7 +40,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TimePicker
-import androidx.compose.material3.TimePickerState
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -171,9 +176,9 @@ fun DatePickerField() {
 
 @Composable
 fun HourTimePickerField() {
-    var showHourPicker by remember { mutableStateOf(false) }
+    var showTimePicker by remember { mutableStateOf(false) }
     val currentTime = Calendar.getInstance()
-    var selectedTime: TimePickerState? by remember { mutableStateOf(null) }
+    var selectedTime by remember { mutableStateOf("") }
 
     val timePickerState = rememberTimePickerState(
         initialHour = currentTime.get(Calendar.HOUR_OF_DAY),
@@ -184,21 +189,21 @@ fun HourTimePickerField() {
     ) {
         val focusManager = LocalFocusManager.current
         TextField(
-            value = selectedTime.toString(),
+            value = selectedTime,
             supportingText = { Text("Hora de la cita") },
-            onValueChange = {  },
+            onValueChange = { },
             label = { Text("Hora") },
             modifier = Modifier.onFocusEvent { focusState ->
                 if (focusState.isFocused) {
-                    showHourPicker = true
+                    showTimePicker = true
                     focusManager.clearFocus()
                 }
             }
         )
 
-        if (showHourPicker) {
+        if (showTimePicker) {
             Popup(
-                onDismissRequest = { showHourPicker = false },
+                onDismissRequest = { showTimePicker = false },
                 alignment = Alignment.TopStart,
                 properties = PopupProperties(dismissOnClickOutside = true)
             ) {
@@ -217,30 +222,40 @@ fun HourTimePickerField() {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.End
                     ) {
-                            TextButton(
-                                onClick = {
-                                    timePickerState
-                                    showHourPicker = false
-//                                    selectedDate = ""
-                                },
-                                enabled = true,
-                            ) {
-                                Text("Cancelar")
-                            }
-                            TextButton(
-                                onClick = { showHourPicker = false },
-                                enabled = timePickerState.toString().isNotEmpty(),
-                                ) {
-                                Text("OK")
-                            }
+                        TextButton(
+                            onClick = {
+                                showTimePicker = false
+                                selectedTime = ""
+                            },
+                            enabled = true,
+                        ) {
+                            Text("Cancelar")
                         }
+                        TextButton(
+                            onClick = {
 
+                                val cal = Calendar.getInstance()
+                                cal.set(Calendar.HOUR_OF_DAY, timePickerState.hour)
+                                cal.set(Calendar.MINUTE, timePickerState.minute)
+                                cal.isLenient = false
+                                selectedTime = SimpleDateFormat(
+                                    "hh:mm a",
+                                    Locale.getDefault()
+                                ).format(cal.time)
+                                showTimePicker = false
+                            },
+                            enabled = true
+                        ) {
+                            Text("OK")
+                        }
                     }
 
-
                 }
+
+
             }
         }
+    }
 }
 
 fun convertMillisToDate(millis: Long): String {
@@ -262,10 +277,8 @@ fun inputFields() {
         onValueChange = { especialidad.value = it },
         label = { Text("Especialidad") },
     )
-
     DatePickerField()
     HourTimePickerField()
-
     TextField(
         value = medico.value,
         supportingText = { Text("Nombre del medico") },
@@ -286,6 +299,21 @@ fun inputFields() {
 @Composable
 fun BotonesCrearCita(onCliclCancelar: () -> Unit, onClickAgregar: () -> Unit) {
     Button(
+        onClick = onCliclCancelar,
+        colors = ButtonDefaults.buttonColors(
+            contentColor = MaterialTheme.colorScheme.error,
+            containerColor = MaterialTheme.colorScheme.errorContainer
+        ),
+    ) {
+        Icon(
+            Icons.Outlined.Cancel,
+            contentDescription = "" // Add a valid content description
+        )
+        Spacer(Modifier.width(2.dp))
+        Text("Cancelar")
+    }
+
+    Button(
         onClick = onClickAgregar,
     ) {
         Icon(
@@ -295,37 +323,38 @@ fun BotonesCrearCita(onCliclCancelar: () -> Unit, onClickAgregar: () -> Unit) {
         Spacer(Modifier.width(2.dp))
         Text("Agregar")
     }
-    Button(
-        onClick = onCliclCancelar,
-    ) {
-        Icon(
-            Icons.Outlined.Cancel,
-            contentDescription = "" // Add a valid content description
-        )
-        Spacer(Modifier.width(2.dp))
-        Text("Cancelar")
-    }
+
 }
 
 @Composable
 fun CrearCitaFormulario(onCliclCancelar: () -> Unit, onClickAgregar: () -> Unit) {
-
-    FlowColumn(
+    Column(
         modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-        horizontalArrangement = Arrangement.Center
+            .fillMaxHeight(1f)
+            .verticalScroll(rememberScrollState()),
     ) {
-        inputFields()
-        FlowRow() {
+        FlowColumn(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            inputFields()
+        }
+        FlowRow(
+            modifier = Modifier
+                .padding(25.dp, 0.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
             BotonesCrearCita(
                 onCliclCancelar = onCliclCancelar,
                 onClickAgregar = onClickAgregar
             )
         }
-
     }
+
 
 }
 

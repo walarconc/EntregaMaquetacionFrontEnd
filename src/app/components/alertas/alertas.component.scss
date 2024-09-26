@@ -63,3 +63,11 @@
   gap: 10px;
   cursor: pointer;
 }
+
+.alertas-list {
+  padding: 0px 8px;
+  gap: 4px;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin-left: 50px;
+}

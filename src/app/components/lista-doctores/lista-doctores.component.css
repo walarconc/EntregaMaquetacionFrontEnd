@@ -7,6 +7,7 @@
   line-height: var(--Headline-Medium-Line-Height, 36px);
   /* 128.571% */
   letter-spacing: var(--Headline-Small-Tracking, 0px);
+  margin-top:  95px;
 }
 
 

@@ -1,1 +1,27 @@
-<p>alertas works!</p>
+<div>
+  <div class="d-flex justify-content-center title">Alertas</div>
+  <div class="d-flex justify-content-center row doctors-list">
+    <div *ngFor="let alerta of alertas" class="col-12">
+      <div class="citas d-flex">
+        <div class="flex-grow-1 row">
+          <p class="alerta-titulo col-8 m-0">
+            {{ alerta.titulo }}
+          </p>
+          <p class="alerta-mensaje col-12">{{ alerta.mensaje }}</p>
+        </div>
+        <!-- heart icon -->
+        <div class="heart-icon">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            class="material-icons-outlined"
+            class="close"
+            (click)="closeAlerta(alerta)"
+            >close
+          </mat-icon>
+        </div>
+      </div>
+      <mat-divider class="doctor-row mx-3"></mat-divider>
+    </div>
+  </div>
+</div>
